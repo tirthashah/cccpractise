@@ -167,37 +167,87 @@ else
 // mapp
  //The array_map() function sends each value of an array to a user-made function, and returns an array with new values, given by the user-made function.
 //function myfunction($v)
-{
-  return($v*$v);
-}
+// {
+//   return($v*$v);
+// }
 
-$a=array(1,2,3,4,5);
-print_r(array_map("myfunction",$a));
+// $a=array(1,2,3,4,5);
+// print_r(array_map("myfunction",$a));
 
-// array reduce 
-//concet krse
-function myfunction($v1,$v2)
-{
-return $v1 . "-" . $v2;
-}
-$a=array("Dog","Cat","Horse");
-print_r(array_reduce($a,"myfunction",5));
+// // array reduce 
+// //concet krse
+// function myfunction($v1,$v2)
+// {
+// return $v1 . "-" . $v2;
+// }
+// $a=array("Dog","Cat","Horse");
+// print_r(array_reduce($a,"myfunction",5));
 
-//array slicing
-//Start the slice from the third array element, and return the rest of the elements in the array:
-$a=array("red","green","blue","yellow","brown");
-print_r(array_slice($a,2));
+// //array slicing
+// //Start the slice from the third array element, and return the rest of the elements in the array:
+// $a=array("red","green","blue","yellow","brown");
+// print_r(array_slice($a,2));
 
 
-$a=array("red","green","blue","yellow","brown");
-print_r(array_slice($a,-2,1));
+// $a=array("red","green","blue","yellow","brown");
+// print_r(array_slice($a,-2,1));
 
-//array splice
+// //array splice
 
-$a1=array("a"=>"red","b"=>"green","c"=>"blue","d"=>"yellow");
-$a2=array("a"=>"purple","b"=>"orange");
-array_splice($a1,0,2,$a2);
-print_r($a1);
+// $a1=array("a"=>"red","b"=>"green","c"=>"blue","d"=>"yellow");
+// $a2=array("a"=>"purple","b"=>"orange");
+// array_splice($a1,0,2,$a2);
+// print_r($a1);
+//arrayfunction
+
+
+
+// array sorting
+// sort() in assending order 
+//rsort() in descending order
+// asort()  sorting array in aecending order with value
+//ksort() sorting arrays in aecending order with key
+// arsort() sorting array with  descending  order with value
+//krsort () sorting array with descening order with key
+
+
+$cars= array("bmw","oddy","volvo");
+sort($cars);
+
+// numerical number ascending order
+$num =array (2,4,7,8,99);
+sort($num);
+
+//descending order // alphabatic  b,t,v
+$cars= array("bmw","oddy","volvo");
+rsort($cars);
+
+//descending order 99,8,7,4,2
+$num =array (2,4,7,8,99);
+sort($num);
+
+// ascending order according to value 
+$car= array("bmw"=>"34","toyoto"=> "89","volvo"=> "45");
+asort($car);
+ // a aece
+
+// ascending order with key where first b,t,v
+
+$car= array("bmw"=>"34","toyoto"=> "89","volvo"=> "45");
+ksort($car);
+
+// array sort in descending order according to value
+
+$car= array("bmw"=>"34","toyoto"=> "89","volvo"=> "45");
+arsort($car);
+
+//array sort in descending order according to key
+
+$car= array("bmw"=>"34","toyoto"=> "89","volvo"=> "45");
+krsort($car);
+
+
+
 
 
 
