@@ -87,7 +87,7 @@ for ($i = $length - 1; $i >= 1; $i--) {
         if ($j >= $i && $j <= $length - $i + 1) {
             echo "$j ";
         } else {
-            echo "- ";
+            echo "-";
         }
     }
     echo "<br>";
