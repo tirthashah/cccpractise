@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 
 // for ($i = 1; $i <= 100; $i++) {
@@ -42,4 +42,23 @@ for($a = 1; $a <= 50 ; $a++)
 
 
 
-?>
+// ?>
+
+
+
+
+
+<!-- <//?php
+
+// Nested for loops to print numbers from 1 to 10
+// for ($i = 1; $i <= 10; $i++) {
+//     echo "outer loop : $i ";
+//     echo "<br>";
+//     for ($j = 10; $j >=1; $j--) {
+//         echo "inner loop : $j ";
+//         echo "<br>";
+//     }
+//     echo "<br>";
+//     echo "<br>";
+//} -->
+
