@@ -15,7 +15,7 @@
         <input type="text" id="sku" name="sku" required><br>
 
         <label>Product Type:</label>
-        <input type="radio" id="simpleType" name="productType" value="Simple" checked>
+        <input type="radio" id="simpleType" name="productType" value="Simple" checked>  //group1 product name  name = "group1(productname)"  //array mate
         <label for="simpleType">Simple</label>
         <input type="radio" id="bundleType" name="productType" value="Bundle">
         <label for="bundleType">Bundle</label><br>

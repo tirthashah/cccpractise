@@ -1,16 +1,16 @@
-<!-- <html>
-    <head>
-        <h1>This program using loop</h1>
-    </head>
-    <body>
-        <form method="post">
-            Enter the number : <br>
-            <input type="number" name="number" id="name">
-             <input type="submit" name="submit" id ="submit"/>
-        </form>
+<?php
+function calculateFactorial($number) {
+    // Base case: factorial of 0 is 1
+    if ($number == 0) {
+        return 1;
+    } else {
+        // Recursive case: n! = n * (n-1)!
+        return $number * calculateFactorial($number - 1);
+    }
+}
 
+$testNumber = 5; 
+$factorialResult = calculateFactorial($testNumber);
 
-    </body>
-
-</html> -->
-
+echo "The factorial of {$testNumber} is: {$factorialResult}";
+?>
