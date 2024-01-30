@@ -20,14 +20,4 @@ $obj = new MynewClass();
 $obj->undefinedMethod(1, 'abc');
 // Output: Calling object method 'undefinedMethod' with arguments: 1, abc
 
-
-
-
-
-
-
-
-
-
-
 ?>
