@@ -111,7 +111,7 @@ $conn->close();
 
 <br>
 
-<a href="record.php">View Last 10 Entries</a>
+<a href="record.php">View Last 20 Entries</a>
 
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+include 'sql/connection.php';
 include 'sql/functions.php'; 
 // function fetchProductData($product_id, $conn) {
 //     // Fetch the record based on the Product ID
@@ -13,17 +14,7 @@ include 'sql/functions.php';
 // }
 
 // Connect to the database
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "ccc_practice";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     // Get the product ID from the URL
@@ -54,17 +45,44 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
             <input type="text" name="sku" value="<?php echo $row['sku']; ?>" required><br>
             <!-- Update this line to match your actual column name -->
             <label for="category">Product Category:</label>
-            <select name="category" required>
-                <option value="Bar & Game Room">Bar & Game Room</option>
-                <option value="Bedroom">Bedroom</option>
-                <option value="Decor">Decor</option>
-                <option value="Dining & Kitchen">Dining & Kitchen</option>
-                <option value="Lighting">Lighting</option>
-                <option value="Living Room">Living Room</option>
-                <option value="Mattresses">Mattresses</option>
-                <option value="Office">Office</option>
-                <option value="Outdoor">Outdoor</option>
+            <!-- Update this line to match your actual column name -->
+<label for="category">Product Category:</label>
+<select name="category" required>
+    <option value="Bar & Game Room" <?php echo ($row['category'] == 'Bar & Game Room') ? 'selected' : ''; ?>>Bar & Game Room</option>
+    <option value="Bedroom" <?php echo ($row['category'] == 'Bedroom') ? 'selected' : ''; ?>>Bedroom</option>
+    <option value="Decor" <?php echo ($row['category'] == 'Decor') ? 'selected' : ''; ?>>Decor</option>
+    <option value="Dining & Kitchen" <?php echo ($row['category'] == 'Dining & Kitchen') ? 'selected' : ''; ?>>Dining & Kitchen</option>
+    <option value="Lighting" <?php echo ($row['category'] == 'Lighting') ? 'selected' : ''; ?>>Lighting</option>
+    <option value="Living Room" <?php echo ($row['category'] == 'Living Room') ? 'selected' : ''; ?>>Living Room</option>
+    <option value="Mattresses" <?php echo ($row['category'] == 'Mattresses') ? 'selected' : ''; ?>>Mattresses</option>
+    <option value="Office" <?php echo ($row['category'] == 'Office') ? 'selected' : ''; ?>>Office</option>
+    <option value="Outdoor" <?php echo ($row['category'] == 'Outdoor') ? 'selected' : ''; ?>>Outdoor</option>
+</select><br>
+<label for="manufacturer_cost">Manufacturer Cost:</label>
+            <input type="text" name="manufacturer_cost" value="<?php echo $row['manufacturer_cost']; ?>" required><br>
+
+            <label for="shipping_cost">Shipping Cost:</label>
+            <input type="text" name="shipping_cost" value="<?php echo $row['shipping_cost']; ?>" required><br>
+
+            <label for="total_cost">Total Cost:</label>
+            <input type="text" name="total_cost" value="<?php echo $row['total_cost']; ?>" required><br>
+
+            <label for="price">Price:</label>
+            <input type="text" name="price" value="<?php echo $row['price']; ?>" required><br>
+
+            <label for="status">Status:</label>
+            <select name="status" required>
+                <option value="Enabled" <?php echo ($row['status'] == 'Enabled') ? 'selected' : ''; ?>>Enabled</option>
+                <option value="Disabled" <?php echo ($row['status'] == 'Disabled') ? 'selected' : ''; ?>>Disabled</option>
             </select><br>
+
+            <label for="created_at">Created At:</label>
+            <input type="date" name="created_at" value="<?php echo $row['created_at']; ?>" required><br>
+
+            <label for="updated_at">Updated At:</label>
+            <input type="date" name="updated_at" value="<?php echo $row['updated_at']; ?>" required><br>
+
+            
 
             <!-- Add other form fields here with their values -->
 
@@ -83,4 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
 
 // Close the database connection
 $conn->close();
+
+
+
+
 ?>
