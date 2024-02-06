@@ -3,7 +3,8 @@ class View_Product
 {
     public function __construct()
     {
-
+        
+        
     }
 
     public function createForm()

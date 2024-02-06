@@ -21,4 +21,27 @@ class Model_Product extends Model_Abstract
         // echo $sql;
         // print_r($data);
     }
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+

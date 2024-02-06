@@ -12,4 +12,13 @@ if(!$request->isPost()) {
 	$product = new Model_Product();
 	$product->save($request->getParams('pdata'));
 	// print_r();
+
+
+    
+	$sql=selectQuery("ccc_product");
+	$result = $conn->query($sql);
+
+	
+
 }
+
