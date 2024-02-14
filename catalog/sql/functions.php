@@ -121,3 +121,4 @@ function fetchProductData($product_id, $conn) {
     }
 }
 ?>
+
