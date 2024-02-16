@@ -1,28 +1,18 @@
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Information</title>
-    <?php echo ($this->getChild('head')->toHtml()); ?>
+    <title>MVC</title>
+    <?php
+    //   $this->getChildHtml('head');
+       ?>
 </head>
 
 <body>
-    <div>
-        <?php echo ($this->getChildHtml('header')); ?>
-    </div>
-    
-    <div>
-        <?php echo ($this->getChildHtml('messages')); ?>
-    </div>
-    
-    <div>
-        <?php echo ($this->getChildHtml('footer')); ?>
-    </div>
-    <div>
-        <?php echo ($this->getChildHtml('content')); ?>
-    </div>
-</body>
-
+    <h1>
+            <div><?php $this->getChildHtml('header'); ?> </div>
+            <div><?php $this->getChildHtml('content'); ?> </div>
+            <div><?php $this->getChildHtml('messages'); ?> </div>
+            <div><?php $this->getChildHtml('footer'); ?> </div>
+        </h1>
+    </body>
 </html>
