@@ -1,22 +1,21 @@
 <?php
-
-class Page_Block_Head extends Core_Block_Template
-{
-    protected $_js =[];
-    protected $_css =[];
+class Page_Block_Head extends Core_Block_Template{
+    protected $_css = [];
+    protected $_js = [];
     public function __construct(){
-        $this->setTemplate("page/head.phtml");
+        $this->setTemplate('page/head.phtml');
     }
-    public function addjs($file){
+
+    public function addJs($file){
         $this->_js[] = $file;
     }
-    public function addcss($file){
+    public function addCss($file){
         $this->_css[] = $file;
     }
-    public function getjs(){
+    public function getJs(){
         return $this->_js;
     }
-    public function getcss(){
+    public function getCss(){
         return $this->_css;
     }
 }

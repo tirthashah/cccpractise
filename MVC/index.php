@@ -1,5 +1,10 @@
-<?php 
-include_once("App/Mage.php");
-include_once("App/Code/Local/autoload.php");
-Mage ::init();
-?>
+<?php
+
+include "app/code/local/autoload.php";
+include "app/Mage.php";
+
+Mage::init();
+
+
+
+

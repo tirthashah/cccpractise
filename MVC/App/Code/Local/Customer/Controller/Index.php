@@ -1,20 +1,22 @@
 <?php
+
 class Customer_Controller_Index
 {
     public function newAction()
     {
-        echo "Customer New Action";
+        echo "Address New Action";
     }
     public function listAction()
     {
-        echo "Customer List Action";
+        echo "Address New Action";
     }
     public function saveAction()
     {
-        echo "Customer Save Action";
+        echo "Address New Action";
     }
     public function deleteAction()
     {
-        echo "Customer Delete Action";
+        echo "Address New Action";
     }
+
 }

@@ -1,78 +1,88 @@
 <?php
+class Core_Model_Request
+{
+	// public function __construct(){
+	// }
 
-class Core_Model_Request{
-    protected $_controllerName,$_actionName,$_moduleName;
-   
-    public function __construct(){
-        $requstUri = $this->getRequestUri();
-        $requstUri =array_filter(explode("/",$requstUri));
-        $this->_moduleName     = isset($requstUri[0])?$requstUri[0]:"page";
-        $this->_controllerName = isset($requstUri[1])?$requstUri[1]:"index";
-        $this->_actionName     = isset($requstUri[2])?$requstUri[2]:"index";
-    }
-    // public function getRequestUri()
-    // {
-    //     $requst = $_SERVER["REQUEST_URI"];
-    //     $uri = str_replace("/Internship/Mvc/", "", $requst);
-    //     if(str_contains($uri, '?'))
-    //     {
-    //         $pos = strpos($uri, '?');
-    //         $temp_uri = substr($uri,$pos);
-    //         $uri = str_replace($temp_uri,"",$uri);
-    //         return $uri;
-    //     }
-    //     return $uri;
-    // }
-    public function getRequestUri()
-    {
-        $requst = $_SERVER["REQUEST_URI"];
-        $uri = str_replace("/cybercom/Mvc", "", $requst);
-        $uri = stristr($uri, '?', True);
-        return $uri;
-    }
-    public function getModuleName(){
-        return $this->_moduleName;
-    }
-    public function getControllerName(){
-        return $this->_controllerName;
-    }
-    public function getActionName(){
-        return $this->_actionName;
-    }
-    public function getFullControllerClass(){
-        return implode("_",[ucfirst($this->_moduleName),'Controller',ucfirst($this->_controllerName)]);
-    }
-    public function getparams($keys=''){
-        return ($keys == '')
-        ? $_REQUEST
-        : (isset($_REQUEST[$keys])
-            ? $_REQUEST[$keys]
-            : ''
-        );
-    }
-    public function getPostData($keys=''){
-        return ($keys == '')
-        ? $_POST
-        : (isset($_POST[$keys])
-            ? $_POST[$keys]
-            : ''
-        );
-    }
-    public function getGetData($keys=''){
-        return ($keys == '')
-        ? $_GET
-        : (isset($_GET[$keys])
-            ? $_GET[$keys]
-            : ''
-        );
-    }
-    public function isPost()
+	public function getParams($key = '')
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		    return true;
+		return ($key == '')
+			? $_REQUEST
+			: (isset($_REQUEST[$key])
+				? $_REQUEST[$key]
+				: ''
+			);
+	}
+
+	public function getPostData($key = '')
+	{
+		return ($key == '')
+			? $_POST
+			: (isset($_POST[$key])
+				? $_POST[$key]
+				: ''
+			);
+	}
+
+	public function getQueryData($key = '')
+	{
+		return ($key == '')
+			? $_GET
+			: (isset($_GET[$key])
+				? $_GET[$key]
+				: ''
+			);
+	}
+
+	public function isPost()
+	{
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			return true;
 		}
 		return false;
 	}
-}
 
-?>
+	public function getRequestUri()
+	{
+		$requstUri = $_SERVER['REQUEST_URI'];
+		$uri = str_replace('/cybercom/MVC/', '', $requstUri);
+		if(strpos($uri,'?') !== false) 
+			$uri = stristr($uri, '?', True);
+		// print_r($uri);
+		return $uri;
+	}
+	protected $_controllerName, $_moduleName, $_actionName;
+
+	public function getModuleName()
+	{
+		return $this->_moduleName;
+	}
+	public function getControllerName()
+	{
+		return $this->_controllerName;
+	}
+	public function getActionName()
+	{
+		return $this->_actionName;
+	}
+	public function __construct()
+	{
+		$requestUri = $this->getRequestUri();
+      $requestUri = array_filter(explode('/', $requestUri)); //veriable ma url mali 
+        // print_r($requestUri);
+		//-> access kre
+        $this->_moduleName = isset( $requestUri[0]) ?  $requestUri[0] : "page";
+        $this->_controllerName = isset( $requestUri[1]) ?  $requestUri[1] : "index";
+        $this->_actionName =isset( $requestUri[2]) ?  $requestUri[2] : "index";
+	}
+	public function getFullControllerClass()
+	{
+		// // Page_Controller_index
+		// $model = $this->_moduleName;
+		// $contro = $this->_controllerName;
+		// return ucfirst($model) .'_Controller_' .ucfirst($contro);
+		$controllerClass = implode('_', [ucfirst($this->_moduleName), 'Controller', ucfirst($this->_controllerName)]);
+		// $controllerClass=stristr($controllerClass,'?',true);
+        return $controllerClass;
+	}
+}

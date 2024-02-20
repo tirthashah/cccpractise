@@ -1,4 +1,5 @@
 <?php
+
 class Customer_Controller_Address
 {
     public function newAction()
@@ -7,14 +8,15 @@ class Customer_Controller_Address
     }
     public function listAction()
     {
-        echo "Address List Action";
+        echo "Address New Action";
     }
     public function saveAction()
     {
-        echo "Address Save Action";
+        echo "Address New Action";
     }
     public function deleteAction()
     {
-        echo "Address Delete Action";
+        echo "Address New Action";
     }
+
 }
