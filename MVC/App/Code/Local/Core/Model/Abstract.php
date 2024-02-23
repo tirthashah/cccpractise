@@ -33,7 +33,13 @@ class Core_Model_Abstract{
 
        return new $this->_resourceClass(); // catalog_model_resource_product no calass banse eno object avse
     }
-    public function getCollection(){}
+    public function getCollection()
+    {
+        $collection = new $this->_collectionClass();
+        $collection->setResource($this->getResource());
+        $collection->select();
+        return $collection;
+    }
    
     public function getTableName(){}
     public function camelCase2UnderScore($str, $separator = "_")
@@ -74,6 +80,7 @@ class Core_Model_Abstract{
        if($this->getId()){
         $this->getResource()->delete($this);
        }
+       return $this;
     }
             
 }

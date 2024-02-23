@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php $data = $this->getCategory(); ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category Form</title>
-</head>
 
-<body>
+  <div class="title">Category Information</div>
     <form action="<?php echo $this->getUrl('admin/catalog_category/save') ?>">
         <div class="row">
             <label for="name">Name : </label>
@@ -22,6 +16,3 @@
             <input type="submit" value="Submit">
         </div>
     </form>
-</body>
-
-</html>
