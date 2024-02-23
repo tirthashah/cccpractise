@@ -57,24 +57,28 @@ class Core_Model_DB_Adapter
         }
     }
 
-
-
-
-
-
-    //   if (mysqli_query($this->connect(), $query)) {
-    //         return mysqli_insert_id($this->connect());
-    //     } else {
-    //         return FALSE;
-    //     } 
-
     
     public function update($query)
     {
+        $sql = mysqli_query($this->connect(), $query);
+        if ($sql) {
+            echo "<script>alert('data update sucessfully ')</script>";
+        } else {
+            return FALSE;
+        }
     }
     public function delete($query)
     {
+       
+        $sql = mysqli_query($this->connect(), $query);
+        if ($sql) {
+            echo "<script>alert('data deleted sucessfully ')</script>";
+        } else {
+            echo "<script>alert('')</script>";
+         
+        }
     }
+
     public function query($query)
     {
     }

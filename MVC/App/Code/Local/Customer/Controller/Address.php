@@ -1,6 +1,6 @@
 <?php
 
-class Customer_Controller_Address
+class Customer_Controller_Address 
 {
     public function newAction()
     {

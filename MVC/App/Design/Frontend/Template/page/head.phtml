@@ -6,8 +6,8 @@
 <?php endif; ?>
 
 <?php $css = $this->getCss(); ?>
-<?php if(count($css)): ?>
+<?php  if(count($css)): ?>
     <?php foreach($css as $_css): ?>
-        <style type="" href="<?php echo $_css; ?>"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->getCssUrl($_css); ?>">
     <?php endforeach; ?>
 <?php endif; ?>

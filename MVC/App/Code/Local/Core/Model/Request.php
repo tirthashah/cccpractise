@@ -65,7 +65,7 @@ class Core_Model_Request
 	{
 		return $this->_actionName;
 	}
-	public function __construct()
+	public function __construct()  
 	{
 		$requestUri = $this->getRequestUri();
       $requestUri = array_filter(explode('/', $requestUri)); //veriable ma url mali 
@@ -82,7 +82,7 @@ class Core_Model_Request
 		// $contro = $this->_controllerName;
 		// return ucfirst($model) .'_Controller_' .ucfirst($contro);
 		$controllerClass = implode('_', [ucfirst($this->_moduleName), 'Controller', ucfirst($this->_controllerName)]);
-		// $controllerClass=stristr($controllerClass,'?',true);
+		// $controllerClass=stristr($controllerClass,'?',true);  admin_controller_catalog_product
         return $controllerClass;
 	}
 }

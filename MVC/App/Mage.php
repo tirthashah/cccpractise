@@ -1,6 +1,7 @@
 <?php
 class Mage
    {
+      private static $baseUrl = "http://localhost/cybercom/MVC";
     private static $registry = [];
     private static $baseDir= 'C:/xampp/htdocs/cybercom/MVC';
     public static function init(){
@@ -10,7 +11,8 @@ class Mage
         // $modelObj->getRequestUri();
         // echo get_class($modelObj);
         $controllerObj = new Core_Controller_Front();
-        $controllerObj->init();
+
+        $controllerObj->init(); 
         // echo $modelObj;
     }
     
@@ -49,8 +51,21 @@ public static function getBaseDir($subDir = null)
    if($subDir){
       return self::$baseDir."/".$subDir;
   } 
+
       return self::$baseDir;
 }
+public static function getBaseUrl($subUrl){
+
+   if ($subUrl) {
+        
+       return self::$baseUrl . '/' . $subUrl;
+   }
+   return self::$baseUrl;
+}
+
+
+
+
 }
    
 ?>

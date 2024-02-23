@@ -16,11 +16,13 @@ class Core_Block_Template extends Core_Block_Abstract
     {
     }
     public function getChild($key)
+    
     {
-        return $this->_child[$key];  
+    
+                return $this->_child[$key];  //header no object mali jase 
     }    
 
-    public function getChildHtml($key)
+    public function getChildHtml($key) //tohtml ne direct call kri sakay rander vadi file  return thai jase
     {
         $html="";
         if($key=="" && count($this->_child)){

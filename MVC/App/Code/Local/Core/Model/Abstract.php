@@ -31,7 +31,7 @@ class Core_Model_Abstract{
         // $modelClass = str_replace('_Model_', '_Model_Resource_', $modelClass);        
         // return new $modelClass();
 
-       return new $this->_resourceClass();
+       return new $this->_resourceClass(); // catalog_model_resource_product no calass banse eno object avse
     }
     public function getCollection(){}
    
@@ -62,7 +62,7 @@ class Core_Model_Abstract{
     public function addData($key, $value){}
     public function removeData($key = null){}
     public function save(){
-        $this->getResource()->save($this);
+        $this->getResource()->save($this); //get recource no object apse
         return $this;
     }
     public function load($id, $column=null){
@@ -70,6 +70,9 @@ class Core_Model_Abstract{
     $this->_data=$this->getResource()->load($id, $column);
     return $this;
     }
-    public function delete(){}
-
+    public function delete($id){
+        $this->getResource()->delete($id);
+        return $this;
+    }
+            
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Customer_Controller_Index
+class Customer_Controller_Index extends Core_Controller_Front_Action
 {
     public function newAction()
     {
