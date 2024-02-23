@@ -16,38 +16,63 @@ class Core_Model_Resource_Abstract {
 
     public function load($id,$column=null){
         $query = "SELECT * FROM {$this->_tableName} WHERE {$this->_primaryKey}={$id}";
+        
         return $this->getAdapter()->fetchRow($query);
     }
 
-    public function save(Catalog_Model_Product $product){
-        $obj = Mage::getModel('core/request');
-        $id = $obj->getQueryData('id');
-        if ($id) {
-            $data = $product->getData();
-            $sql = $this->editSql($this->getTableName(), $data, ['product_id' => $id]);
+    // public function save(Core_Model_Abstract $product){
+    //     $obj = Mage::getModel('core/request');
+    //     $id = $obj->getQueryData('id');
+    //     if ($id) {
+    //         $data = $product->getData();
+    //         $sql = $this->editSql($this->getTableName(), $data, ['category_id' => $id]);
+    //        echo $sql;
+    //         $id = $this->getAdapter()->update($sql);
+    //     } else {
+    //         $data = $product->getData();
+    //         if (isset($data[$this->getPrimaryKey()])) {
+    //             unset($data[$this->getPrimaryKey()]);
+    //         }
+    //         print_r($data);
+    //         $sql = $this->insertSql($this->getTableName(), $data);
+    //         echo $sql;
+    //         $id = $this->getAdapter()->insert($sql);
+    //         $product->setId($id);
+    //         print_r($product->getData());
+    //     }
+    // }
+    public function save(Catalog_Model_Product $product)
+    {
+        $data = $product->getData();
+        if(isset($data[$this->getPrimaryKey()]) && !empty($data[$this->getPrimaryKey()])){
+            unset($data[$this->getPrimaryKey()]);
+            $sql = $this->editSql(
+                $this->getTableName(),
+                $data, 
+                [$this->getPrimaryKey()=>$product->getId()]
+            );
             $id = $this->getAdapter()->update($sql);
-        } else {
-            $data = $product->getData();
-            if (isset($data[$this->getPrimaryKey()])) {
-                unset($data[$this->getPrimaryKey()]);
-            }
-            $sql = $this->insertSql($this->getTableName(), $data);
-            echo $sql;
-            $id = $this->getAdapter()->insert($sql);
-            $product->setId($id);
-            print_r($product->getData());
-        }
+        }else{
+        $sql = $this->insertSql($this->getTableName(),$data);
+        $id = $this->getAdapter()->insert($sql);
+        $product->setId($id);
     }
-    
+    }
 
-    public function delete($id){
+    public function delete(Core_Model_Abstract $abstract)
+    {
+        $query = $this->deleteSql($this->getTableName(),['product_id'=>$abstract->getId()]) ;
+        return $this->getAdapter()->delete($query);
+    }
+
+    // public function delete($id){
         
-        $where = [$this->_primaryKey=>$id];
-       
-        $sql = $this->deleteSql($this->getTableName(), $where);
-        $this->getAdapter()->delete($sql); 
+    //     $where = [$this->_primaryKey=>$id];
+    //     $sql = $this->deleteSql($this->getTableName(), $where);
+    //     echo $sql;
+    //     $this->getAdapter()->delete($sql); 
 
-    }
+    // }
     function editSql( $table, $data, $condition=[]) {
         $set = "";
         foreach ($data as $key => $value) {

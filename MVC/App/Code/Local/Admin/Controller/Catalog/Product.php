@@ -7,7 +7,7 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
-            ->addCss('form.css');
+            ->addCss('product.css');
             // print_r($layout->getChild('head')->getCss());
     }
 
@@ -15,9 +15,8 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
     {
         $layout = $this->getLayout();
         $this->setFormCss();
-      
         $child = $layout->getChild('content'); //object j return krse content no layout ma create block ma ena class no objec t malse
-        $productForm = $layout->createBlock('catalog/admin_product');
+        $productForm = $layout->createBlock('catalog/admin_product_form');
         $child->addChild('form', $productForm);
         $layout->toHtml();
     }
@@ -28,27 +27,35 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
         echo "<pre>";
         $obj = Mage::getModel('core/request');
         $id = $obj->getQueryData('id'); // id return krse kato id nai pass kri hoy toh blank return krse
-
-        if ($id) {
-            $data = ['name' => 'BMW'];
-        } else {
-            $data = $this->getRequest()->getParams('catalog_product'); //je data ma nakhyu ae ae apse
-        }
+        
+        
+            $data = $this->getRequest()->getparams("catalog_product"); //array return krse
+        
         $product = Mage::getModel('catalog/product')
             ->setData($data);
         $product->save();
 
 
     }
+
     public function deleteAction()
     {
-       
-
-      $product= Mage::getModel('catalog/product');
-           $id= $this->getRequest()->getParams('id'); //req ni ader param che
-             $product->delete($id);
-             
+        Mage::getModel('catalog/product')->load('product_id')
+            ->setId($this->getRequest()->getParams('id'))
+            ->delete();
     }
+   
+
+    public function listAction(){
+        $layout = $this->getLayout();
+        $child = $layout->getchild('content');
+        $productForm= $layout->createBlock('catalog/admin_produt_list');
+                              
+        $child->addchild('list',$productForm);
+        $layout->toHtml();
+        
+    }
+    
 
 
 

@@ -70,9 +70,10 @@ class Core_Model_Abstract{
     $this->_data=$this->getResource()->load($id, $column);
     return $this;
     }
-    public function delete($id){
-        $this->getResource()->delete($id);
-        return $this;
+    public function delete(){
+       if($this->getId()){
+        $this->getResource()->delete($this);
+       }
     }
             
 }

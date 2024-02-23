@@ -38,7 +38,7 @@ class Core_Model_DB_Adapter
         $result = mysqli_query($this->connect, $query);
         while ($_row = mysqli_fetch_assoc($result)) {   
             $row=$_row;
-         }
+        }
          return $row;
     }
 

@@ -4,15 +4,24 @@ class Core_Model_Request
 	// public function __construct(){
 	// }
 
-	public function getParams($key = '')
-	{
+	// public function getParams($key = '')
+	// {
+	// 	return ($key == '')
+	// 		? $_REQUEST
+	// 		: (isset($_REQUEST[$key])
+	// 			? $_REQUEST[$key]
+	// 			: ''
+	// 		);
+	// }
+	public function getParams($key = '', $arg = null) {
 		return ($key == '')
 			? $_REQUEST
 			: (isset($_REQUEST[$key])
 				? $_REQUEST[$key]
-				: ''
+				: ((!is_null($arg)) ? $arg : '')
 			);
 	}
+
 
 	public function getPostData($key = '')
 	{

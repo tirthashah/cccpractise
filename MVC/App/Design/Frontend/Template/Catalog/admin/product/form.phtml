@@ -1,7 +1,7 @@
 
 <pre>
 <?php
-$productModel = Mage::getModel('catalog/product')->load(1);
+$productModel = $this->getProduct();
 // print_r($productModel);
 // print_r($productModel->getId());
 // print_r($productModel->getProductName());
@@ -14,30 +14,30 @@ $productModel = Mage::getModel('catalog/product')->load(1);
     <h2>Product Form</h2>
     <form method="POST" action="<?php echo $this->getUrl('admin/catalog_product/save') ?>">
         <div class="row">
-            <input type="hidden" name="catalog_product[product_id]">
+            <input type="hidden" name="catalog_product[product_id]"value ="<?php echo $productModel->getProductId(); ?>" >
         </div>
         <div class="row">
             <label for="sku">SKU : </label>
-            <input type="text" name="catalog_product[sku]" id="sku">
+            <input type="text" name="catalog_product[sku]" id="sku" value="<?php echo  $productModel->getSku(); ?>">
         </div>
         <div class="row">
             <label for="name">Name : </label>
-            <input type="text" name="catalog_product[name]" id="name">
+            <input type="text" name="catalog_product[name]" id="name" value="<?php echo $productModel->getName(); ?>">
         </div>
 
         <div class="row">
             <label for="color">Color : </label>
-            <input type="text" name="catalog_product[color]" id="color">
+            <input type="text" name="catalog_product[color]" id="color" value="<?php echo $productModel->getColor(); ?>">
         </div>
 
         <div class="row">
             <label for="size">Size : </label>
-            <input type="text" name="catalog_product[size]" id="size">
+            <input type="text" name="catalog_product[size]" id="size" value="<?php echo $productModel->getSize(); ?>">
         </div>
 
         <div class="row">
             <label for="description">Description :
-                <textarea name="catalog_product[description]" id="description" cols="30" rows="10"></textarea>
+                <textarea name="catalog_product[description]" id="description" cols="30" rows="10"  ></textarea>
             </label>
         </div>
 

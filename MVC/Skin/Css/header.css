@@ -4,8 +4,22 @@ body {
 }
 
 .topnav {
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topnav .logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+.topnav .logo img{
+  border-radius: 50%;
+  width: 6vw;
+  height: 8vh;
 }
 
 .topnav a {
