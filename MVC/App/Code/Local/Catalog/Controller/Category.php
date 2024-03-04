@@ -1,19 +1,21 @@
 <?php 
-class Catalog_Controller_Category extends Core_Controller_Front_Action{
-    public function formAction()
+class Catalog_Controller_Category extends Core_Controller_Front_Action {
+
+    // protected   $_addToCart = [];
+   
+
+    public function viewAction()
     {
+        $this->setFormCss("view");
         $layout = $this->getLayout();
-        // $layout->getChild('head')->addJs('js/page.js');
-        // $layout->getChild('head')->addJs('js/head.js');
-        // $layout->getChild('head')->addCss('css/page.css');
-        // $layout->getChild('head')->addCss('css/head.css');
-        $child = $layout->getChild('content');
-
-        $categoryForm = $layout->createBlock('catalog/admin_category');
-        $child->addChild('form', $categoryForm);
-
+        $child = $layout->getchild('content'); //core_block_layout
+        $productForm = $layout->createBlock('catalog/admin_category_list');
+        $child->addChild('list',$productForm);
         $layout->toHtml();
-
     }
+
+
+   
+    
 }
 ?>

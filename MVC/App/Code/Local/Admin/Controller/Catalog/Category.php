@@ -1,19 +1,11 @@
 <?php
-class Admin_Controller_Catalog_Category  extends Core_Controller_Front_Action {
+class Admin_Controller_Catalog_Category extends Core_Controller_Admin_Action
+{
 
-
-    public function setFormCss()
+    public function formAction()
     {
         $layout = $this->getLayout();
-        $layout->getChild('head')
-            ->addCss('category.css');
-            // print_r($layout->getChild('head')->getCss());
-
-    }
- public function formAction()
-    {
-        $layout = $this->getLayout();
-        $this->setFormCss();
+        $this->setFormCss('form');
         $child = $layout->getChild('content'); //object j return krse content no layout ma create block ma ena class no objec t malse
         $productForm = $layout->createBlock('catalog/admin_category_form');
         $child->addChild('form', $productForm);
@@ -23,32 +15,30 @@ class Admin_Controller_Catalog_Category  extends Core_Controller_Front_Action {
 
     public function saveAction()
     {
-
-        echo "<pre>";
-        $obj = Mage::getModel('core/request');
-        $id = $obj->getQueryData('id'); // id return krse kato id nai pass kri hoy toh blank return krse
-
-        if ($id) {
-            $data = ['category_name' => 'BMW'];
-        } else {
-            $data = $this->getRequest()->getParams('catalog_category'); //je data ma nakhyu ae ae apse
-            print_r($data);
-        }
-        $product = Mage::getModel('catalog/category')
-            ->setData($data);
-        $product->save();
-
-
+        $data = $this->getRequest()->getparams("catalog_category");
+        Mage::getModel("catalog/category")
+            ->setData($data)
+            ->save();
     }
     public function deleteAction()
     {
-       
-
-      $product= Mage::getModel('catalog/category');
-           $id= $this->getRequest()->getParams(); //req ni ader param che
-             $product->delete($this);
-             
+        Mage::getModel('catalog/category')
+            ->setId($this->getRequest()->getParams('id'))
+            ->delete();
     }
+    public function listAction()
+    {
+        $layout = $this->getLayout();
+        $child = $layout->getchild('content'); //core_block_layout
+        $productForm = $layout->createBlock('catalog/admin_category_list');
+        $child->addchild('list', $productForm);
+        $layout->toHtml();
+    }
+
+    public function view(){
+        
+    }
+
 
 }
 

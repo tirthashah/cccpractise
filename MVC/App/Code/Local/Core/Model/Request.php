@@ -1,18 +1,7 @@
 <?php
 class Core_Model_Request
 {
-	// public function __construct(){
-	// }
 
-	// public function getParams($key = '')
-	// {
-	// 	return ($key == '')
-	// 		? $_REQUEST
-	// 		: (isset($_REQUEST[$key])
-	// 			? $_REQUEST[$key]
-	// 			: ''
-	// 		);
-	// }
 	public function getParams($key = '', $arg = null) {
 		return ($key == '')
 			? $_REQUEST
@@ -51,12 +40,12 @@ class Core_Model_Request
 		return false;
 	}
 
-	public function getRequestUri()
+	public function getRequestUri() //class na name mate use thay
 	{
 		$requstUri = $_SERVER['REQUEST_URI'];
 		$uri = str_replace('/cybercom/MVC/', '', $requstUri);
-		if(strpos($uri,'?') !== false) 
-			$uri = stristr($uri, '?', True);
+		if(strpos($uri,'?') !== false) //? position return krse ? je value api hase eni ane nai male toh flase return krse
+			$uri = stristr($uri, '?', True); // ? ni agal ni puri string return kre // id remove krine path ape
 		// print_r($uri);
 		return $uri;
 	}
@@ -76,8 +65,8 @@ class Core_Model_Request
 	}
 	public function __construct()  
 	{
-		$requestUri = $this->getRequestUri();
-      $requestUri = array_filter(explode('/', $requestUri)); //veriable ma url mali 
+		$requestUri = $this->getRequestUri(); //id pela nu malse  string krse 
+      $requestUri = array_filter(explode('/', $requestUri)); //veriable ma url mali  // class ne explode kriye 
         // print_r($requestUri);
 		//-> access kre
         $this->_moduleName = isset( $requestUri[0]) ?  $requestUri[0] : "page";

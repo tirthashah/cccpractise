@@ -22,6 +22,16 @@ class Core_Model_DB_Adapter
         
         return $this->connect;
     }
+    public function fetchAll($query)
+    {
+        $row=[];
+        $result = $this->connect()->query($query);
+        while($_row = mysqli_fetch_assoc($result)){
+            $row[] = $_row;
+        }
+        return $row;
+    }
+    
    
     public function fetchPairs($query)
     {
@@ -29,27 +39,25 @@ class Core_Model_DB_Adapter
     public function fetchOne($query)
     {
     }
+    
     public function fetchRow($query)
     {
         $row=[];
         $this->connect();
-        $result = mysqli_query($this->connect, $query);
-        while ($_row = mysqli_fetch_assoc($result)) {   
-            $row=$_row;
+        $query = $query . " LIMIT 1";
+        $result = $this->connect->query($query);
+        while($_row = mysqli_fetch_assoc($result)){
+            $row = $_row;
         }
-         return $row;
+        return $row;
     }
 
     
     public function insert($query)
     {
-      $this->connect();
-      $result = mysqli_query($this->connect(),$query);
-      echo "<br>";
-    var_dump($result);
-      if($result){
-    echo mysqli_insert_id($this->connect());
-        return mysqli_insert_id($this->connect());
+        $result = mysqli_query($this->connect(), $query);
+        if($result){
+            return mysqli_insert_id($this->connect);
         }else{
             return FALSE;
         }
@@ -60,7 +68,7 @@ class Core_Model_DB_Adapter
     {
         $sql = mysqli_query($this->connect(), $query);
         if ($sql) {
-            echo "<script>alert('data update sucessfully ')</script>";
+            return TRUE;
         } else {
             return FALSE;
         }
@@ -70,9 +78,9 @@ class Core_Model_DB_Adapter
        
         $sql = mysqli_query($this->connect(), $query);
         if ($sql) {
-            echo "<script>alert('data deleted sucessfully ')</script>";
+          return TRUE;
         } else {
-            echo "<script>alert('')</script>";
+           return FALSE;
          
         }
     }
@@ -80,14 +88,6 @@ class Core_Model_DB_Adapter
     public function query($query)
     {
     }
-    public function fetchAll($query)
-    {
-        $row=[];
-        $result = $this->connect()->query($query);
-        while($_row = mysqli_fetch_assoc($result)){
-            $row[] = $_row;
-        }
-        return $row;
-    }
+  
 
 }

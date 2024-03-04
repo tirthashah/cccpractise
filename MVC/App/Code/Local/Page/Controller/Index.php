@@ -5,31 +5,28 @@ class Page_Controller_Index extends Core_Controller_Front_Action
     public function indexAction()
     {
         $layout = $this->getLayout(); //core_block_layout
-        $layout->getChild('head');  
+        // $layout->getChild('head');
         // echo "<pre>";
         // $layout->getChild('head');
-        $layout->getChild('head')->addJs('js/navigation.js');  //obj head
-        $layout->getChild('head')->addJs('js/page.js');
-        $layout->getChild('head')->addCss('css/navigation.css');
-        $layout->getChild('head')->addCss('css/page.css');
-        // $layout->getChild('content');
+        // $layout->getChild('head')->addCss('css/navigation.css');
+        // $layout->getChild('head')->addCss('css/page.css');
 
-        $banner = $layout->createBlock('core/template')//core_block_template no obj mlse
-                        ->setTemplate('banner/banner.phtml'); //set template abstrct ma thay che toh ema javanu
-        $layout->getChild('content')//obj
-                ->addChild('banner',$banner) // obj array ma store kari dese
-                ->addChild('banner1',$banner);
-                $layout->toHtml();
-            }
-            public function saveAction()
-            {
-                echo "Save Page";
-            }
-            public function listAction()
-            {
-                echo "List Page";
-            }
-        }
+        $banner = $layout->createBlock('core/template')
+                    ->setTemplate('banner/banner.phtml');
+                    Mage::getImagePath("banner/abc.jpg");
+        $layout->getChild('content')//page_block_content
+            ->addChild('banner', $banner);
+        $layout->toHtml();
+    }
+    public function saveAction()
+    {
+        echo "Save Page";
+    }
+    public function listAction()
+    {
+        echo "List Page";
+    }
+}
 
 
 
@@ -38,33 +35,4 @@ class Page_Controller_Index extends Core_Controller_Front_Action
 
 
 
-        
-        // public function indexAction()
-        //     {
-            //         $layout = $this->getLayout();
-            //         $layout->getChild('head')->addJs('js/page.js');
-            //         $layout->getChild('head')->addJs('js/head.js');
-            //         $layout->getChild('head')->addCss('css/page.css');
-            //         $layout->getChild('head')->addCss('css/head.css');
-            //         $child = $layout->getChild('content');
-            //         $banner = $layout->createBlock('core/template')
-            //             ->setTemplate('banner/banner.phtml');
-            //         $child->addChild('banner', $banner);
-            
-            //         $banner1 = $layout->createBlock('core/template')
-            //             ->setTemplate('banner/banner.phtml');
-            //         $child->addChild('banner1', $banner1);
-            
-            
-            
-                    // $child = $layout->getChild('content');
-                    // $banner = $layout->createBlock('core/template')
-                    //     ->setTemplate('banner/banner.phtml');
-                    // $child->addChild('banner', $banner);
-            
-                    // $banner1 = $layout->createBlock('core/template')
-                    //     ->setTemplate('banner/banner.phtml');
-                    // $child->addChild('banner1', $banner1);
-                    // print_r($layout->getChild('head'));
-                    //         $layout->toHtml();
-                    //     }
+

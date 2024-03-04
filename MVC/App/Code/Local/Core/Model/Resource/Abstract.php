@@ -14,65 +14,42 @@ class Core_Model_Resource_Abstract {
         return $this->_tableName;
     }
 
+    public function getAdapter(){
+        return new Core_Model_DB_Adapter();//adapter no obj apse
+    }
+
     public function load($id,$column=null){
-        $query = "SELECT * FROM {$this->_tableName} WHERE {$this->_primaryKey}={$id}";
-        
+        $query = "SELECT * FROM {$this->_tableName} WHERE {$this->_primaryKey}={$id}";  
         return $this->getAdapter()->fetchRow($query);
     }
 
-    // public function save(Core_Model_Abstract $product){
-    //     $obj = Mage::getModel('core/request');
-    //     $id = $obj->getQueryData('id');
-    //     if ($id) {
-    //         $data = $product->getData();
-    //         $sql = $this->editSql($this->getTableName(), $data, ['category_id' => $id]);
-    //        echo $sql;
-    //         $id = $this->getAdapter()->update($sql);
-    //     } else {
-    //         $data = $product->getData();
-    //         if (isset($data[$this->getPrimaryKey()])) {
-    //             unset($data[$this->getPrimaryKey()]);
-    //         }
-    //         print_r($data);
-    //         $sql = $this->insertSql($this->getTableName(), $data);
-    //         echo $sql;
-    //         $id = $this->getAdapter()->insert($sql);
-    //         $product->setId($id);
-    //         print_r($product->getData());
-    //     }
-    // }
-    public function save(Catalog_Model_Product $product)
+    public function save(Core_Model_Abstract $abstract)
     {
-        $data = $product->getData();
+        $data = $abstract->getData();
+        // print_r($data);
         if(isset($data[$this->getPrimaryKey()]) && !empty($data[$this->getPrimaryKey()])){
             unset($data[$this->getPrimaryKey()]);
             $sql = $this->editSql(
                 $this->getTableName(),
                 $data, 
-                [$this->getPrimaryKey()=>$product->getId()]
+                [$this->getPrimaryKey()=>$abstract->getId()]
             );
             $id = $this->getAdapter()->update($sql);
         }else{
         $sql = $this->insertSql($this->getTableName(),$data);
         $id = $this->getAdapter()->insert($sql);
-        $product->setId($id);
+        $abstract->setId($id);
     }
     }
 
-    public function delete(Core_Model_Abstract $abstract)
+    public function delete(Core_Model_Abstract $abstract )
     {
-        $query = $this->deleteSql($this->getTableName(),['product_id'=>$abstract->getId()]) ;
-        return $this->getAdapter()->delete($query);
+        $id = $abstract->getId();
+        $where = [$this->getPrimaryKey() => $id];
+        $sql = $this->deleteSql($this->getTableName(),$where);
+        return $this->getAdapter()->delete($sql);
     }
 
-    // public function delete($id){
-        
-    //     $where = [$this->_primaryKey=>$id];
-    //     $sql = $this->deleteSql($this->getTableName(), $where);
-    //     echo $sql;
-    //     $this->getAdapter()->delete($sql); 
-
-    // }
     function editSql( $table, $data, $condition=[]) {
         $set = "";
         foreach ($data as $key => $value) {
@@ -100,42 +77,9 @@ class Core_Model_Resource_Abstract {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    // public function save(Catalog_Model_Product $product){
-    //     $data = $product->getData(); 
-    //     if(isset($data[$this->getPrimaryKey()])){  
-    //         unset($data[$this->getPrimaryKey()]);
-    //      }
-    //     // echo $this->insertSql($this->getTableName(),$data);
-    //     $sql =  $this->insertSql($this->getTableName(),$data);
-    //     $id = $this->getAdapter()->insert($sql);
-    //     $product->setId($id); //id ne set krva mate che
-    //     // var_dump($id);
-    //     // print_r($product->getData());
-        
-    //     // echo 8999;
-    //     // print_r($data);
-    // }
-
     public function insertSql($tableName, $data)
     {
+        // print_r($data);
         $columns = $values = [];
         foreach ($data as $key => $value) {
             $columns[] = sprintf("`%s`", $key);
@@ -146,7 +90,5 @@ class Core_Model_Resource_Abstract {
         return "INSERT INTO {$tableName} ({$columns}) VALUES ({$values});";
     }
 
-    public function getAdapter(){
-        return new Core_Model_DB_Adapter();
-    }
+ 
 }

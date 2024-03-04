@@ -1,22 +1,15 @@
 <?php
-
-
-class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
+class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
 {
-    public function setFormCss()
-    {
-        $layout = $this->getLayout();
-        $layout->getChild('head')
-            ->addCss('product.css');
-            // print_r($layout->getChild('head')->getCss());
-    }
+    protected $_allowedActions = ['form'];
+ 
 
     public function formAction()
     {
+        $this->setFormCss("form");
         $layout = $this->getLayout();
-        $this->setFormCss();
-        $child = $layout->getChild('content'); //object j return krse content no layout ma create block ma ena class no objec t malse
-        $productForm = $layout->createBlock('catalog/admin_product_form');
+        $child = $layout->getChild('content');
+        $productForm = $layout->createBlock('catalog/admin_product_form');//constructor
         $child->addChild('form', $productForm);
         $layout->toHtml();
     }
@@ -24,56 +17,48 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
 
     public function saveAction()
     {
-        echo "<pre>";
-        $obj = Mage::getModel('core/request');
-        $id = $obj->getQueryData('id'); // id return krse kato id nai pass kri hoy toh blank return krse
-        
-        
-            $data = $this->getRequest()->getparams("catalog_product"); //array return krse
-        
+        $data = $this->getRequest()->getparams("catalog_product");
         $product = Mage::getModel('catalog/product')
             ->setData($data);
-        $product->save();
-
-
+        $result = $product->save();
+        if ($data['product_id']) {
+            if($result){
+                echo '<script>alert("Data updated successfully")</script>';
+                echo "<script>location.href='" . Mage::getBaseUrl() . 'admin/catalog_product/list' . "'</script>";
+            }
+        }
+        else{
+            echo '<script>alert("Data inserted successfully")</script>';
+            echo "<script>location.href='" . Mage::getBaseUrl() . 'admin/catalog_product/list' . "'</script>";
+        }
+        
     }
 
     public function deleteAction()
     {
-        Mage::getModel('catalog/product')->load('product_id')
-            ->setId($this->getRequest()->getParams('id'))
-            ->delete();
-    }
-   
+        $id = $this->getRequest()->getparams("id");
+        $product = Mage::getModel("catalog/product")->load($id);
+        $result = $product->delete();
+        if ($result){
+            echo "<script>alert('data deleted sucessfully')</script>";
+            echo "<script>location.href='" . Mage::getBaseUrl() . 'admin/catalog_product/list' . "'</script>";
+        }
 
-    public function listAction(){
+    }
+
+    public function listAction()
+    {
         $layout = $this->getLayout();
-        $child = $layout->getchild('content');
-        $productForm= $layout->createBlock('catalog/admin_product_list');
-        $child->addchild('list',$productForm);
+        $child = $layout->getchild('content'); //core_block_layout
+        $productForm = $layout->createBlock('catalog/admin_product_list');
+        $child->addchild('list', $productForm);
         $layout->toHtml();
+
+    }
+
+    public function view(){
         
     }
-    
-
-
-
-
-
-
-
-
-
-
-    // public function saveAction()   // init mathi ahiya ayaa apde
-    // {
-    //     echo "<pre>";
-    //     $data = $this->getRequest()->getParams('catalog_product'); //core_model_request
-    //     $product = Mage::getModel('catalog/product') //catalog_model_product no object 
-    //         ->setData($data);  
-    //     $product->save();
-   
-    // }
 }
 
 
@@ -85,4 +70,3 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
 
 
 
-    

@@ -4,6 +4,11 @@ class Catalog_Block_Admin_Category_Form extends Core_Block_Template{
         {
             $this->setTemplate('catalog/admin/category/form.phtml');
         }
-}
+
+        public function getCategory(){
+            return Mage::getModel('catalog/category')->load($this->getRequest()->getParams('id',0));
+        }
+    }
+
 ?>
 
