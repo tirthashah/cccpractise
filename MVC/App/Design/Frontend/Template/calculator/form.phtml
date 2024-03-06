@@ -1,0 +1,55 @@
+<?php
+$calculatorModel = $this->getcalculator();
+?>
+
+<div class="form" style="border:1px solid black; width:30vw; padding: 15px">
+    <h2 style="color:white">Product Form</h2>
+    <form method="POST" action="<?php echo $this->getUrl('calculator/index/form') ?>">
+        <div class="row">
+            <input type="hidden" name="calculator[id]" value ="<?php echo $calculatorModel->getCalculatorId(); ?>">
+        </div>
+        
+        <div class="row">
+            <label for="name">Name : </label>
+            <input type="text" name="calculator[user_name]" id="name" value="<?php echo $calculatorModel->getUserName();?>">
+        </div>
+
+        <div class="row">
+            <label for="frontnumber">front number </label>
+            <input type="text" name="calculator[front_number]" id="frontnumber" value="<?php echo $calculatorModel->getFrontNumber();?>">
+        </div>
+
+        <div class="row">
+            <label for="tonumber">To number </label>
+            <input type="text" name="calculator[To_number]" id="tonumber" value="<?php echo $calculatorModel->getToNumber();?>">
+        </div>
+
+
+        <select name="calculator[oprator]" id="oprator">
+                                <option <?php echo ($calculatorModel->getOprator()=="D")?"selected":"" ?> value="0">Add</option>
+                                <option <?php echo ($calculatorModel->getOprator()=="E")?"selected":"" ?> value="1">Minus</option>
+                                <option <?php echo ($calculatorModel->getOprator()=="D")?"selected":"" ?> value="2">Divide</option>
+                                <option <?php echo ($calculatorModel->getOprator()=="E")?"selected":"" ?> value="3">Percentage</option>
+                                <option <?php echo ($calculatorModel->getOprator()=="D")?"selected":"" ?> value="4">Multiply</option>
+                                
+                            </select>
+        </div>
+
+        
+        </div>
+
+
+
+        <div class="row">
+            <label for="result">result</label>
+            <input type="text" name="calculator[result]" id="result" value="<?php echo $calculatorModel->getResult();?>">
+        </div>
+
+    
+
+        <div class="row">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+

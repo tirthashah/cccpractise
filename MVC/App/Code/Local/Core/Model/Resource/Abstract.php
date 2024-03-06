@@ -20,13 +20,15 @@ class Core_Model_Resource_Abstract {
 
     public function load($id,$column=null){
         $query = "SELECT * FROM {$this->_tableName} WHERE {$this->_primaryKey}={$id}";  
+        
         return $this->getAdapter()->fetchRow($query);
     }
 
     public function save(Core_Model_Abstract $abstract)
     {
         $data = $abstract->getData();
-        // print_r($data);
+        print_r($data);
+        print_r($this->getPrimaryKey());
         if(isset($data[$this->getPrimaryKey()]) && !empty($data[$this->getPrimaryKey()])){
             unset($data[$this->getPrimaryKey()]);
             $sql = $this->editSql(
@@ -67,7 +69,6 @@ class Core_Model_Resource_Abstract {
     }
     public function deleteSql($table_name, $where)
     {
-        //query prepare krine apse
         $where_con_arr = [];
         foreach ($where as $field => $value) {
             $where_con_arr[] = "`$field`='$value'";

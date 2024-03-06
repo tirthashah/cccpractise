@@ -1,13 +1,32 @@
 <?php
+// $productCollection = Mage::getModel("catalog/product")->getCollection();//Catalog_Model_Resource_Collection_Product Object 
+// // print_r($productCollection);    
+// // $productCollection->addFieldToFilter('name','abc');//'name','eq'=>'abc'
+// // $productCollection->addFieldToFilter('product_id','["in"=>[1,12,3]]');
+// // $productCollection->getData();
+// foreach ($productCollection->getData() as  $value) {
+//     echo "Product Id:";
+//     echo "".$value->getProductId();
+//     echo "  Status:";
+//     echo "".$value->getStatus();
+//     echo "<br>";
+//     // echo "".$value->getProductId();
+//     # code...
+// }
 
-
-
+// echo "<pre>";
+// $productCollection = Mage::getModel("catalog/product")->getCollection();
 
 $productCollection = $this->showList();
-
+// $productM = Mage::getModel("catalog/product");
+// $productCollection = Mage::getModel('catalog/product')->getCollection();
 $categoryModel = Mage::getModel('catalog/category');
 $categoryNames = $categoryModel->getCategoryIdName();
-
+// print_r(get_class($this));
+// $productCollection->addFieldToFilter('name', 'abc');
+// $productCollection->addFieldToFilter('product_id', ['in'=>[1,2,3]]);
+// $productCollection->addFieldToFilter('sku', ['like'=>'%abc']);
+// $productCollection->getData();
 ?>
 <div class="box">
     <div class="container-list">
@@ -29,7 +48,7 @@ $categoryNames = $categoryModel->getCategoryIdName();
 
 <?php
 foreach ($productCollection->getData() as $product) {
-    print_r(Mage::getModel('catalog/product')->getStatus());
+    // print_r(Mage::getModel('catalog/product')->getStatus());
     // echo '' . $product->getProductId();
     $selectedCategory = $categoryModel->getCategoryNameById($categoryNames, $product);
     echo "<tr><td class = 'column' style=' padding: 5px 10px;

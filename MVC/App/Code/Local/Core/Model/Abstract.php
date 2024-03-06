@@ -30,20 +30,13 @@ class Core_Model_Abstract
     }
     public function getId()
     {
+        // print_r(debug_backtrace());
 
-        return $this->_data[$this->getResource()->getPrimaryKey()];
+        return (isset($this->_data[$this->getResource()->getPrimaryKey()]))
+         ? $this->_data[$this->getResource()->getPrimaryKey()]
+         : 0 ;//$this->_data['product_id']
     }
-    public function getStatus()
-    {
-        // echo 123;
-        $mapping = [
-            1 => "E",
-            0 => "D"
-        ];
-
-        if(isset($mapping[$this->_status]))
-            return $mapping[$this->_data['status']];
-    }
+ 
 
     public function getResource()
     {
@@ -102,13 +95,24 @@ class Core_Model_Abstract
     }
     public function addData($key, $value)
     {
+        $this->_data[$key] = $value;
+        return $this;
     }
     public function removeData($key = null)
     {
     }
+
+    protected function _beforeSave() {
+
+    }
+    protected function _afterSave() {
+        
+    }
     public function save()
     {
+        $this->_beforeSave();
         $this->getResource()->save($this); //get recource no object apse
+        $this->_afterSave();
         return $this;
     }
     public function load($id, $column = null)

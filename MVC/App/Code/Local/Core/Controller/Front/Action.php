@@ -20,7 +20,7 @@ class Core_Controller_Front_Action
   public function getLayout()
   {
     if (is_null($this->_layout)) {  //check krva mate null che ke nai layout
-      $this->_layout = Mage::getBlock("core/layout");
+      $this->_layout = Mage::getBlock("core/layout");//core_block_layout
       return $this->_layout;
     }
     return $this->_layout;
@@ -69,7 +69,7 @@ public function postdataActionProceed() {
            echo '<h2>Product Not Found in Cart</h2>';
        }
    } else {
-       echo "Please Login to Proceed";
+      $this->setRedirect("customer/account/login");
    }
 }
 
@@ -107,7 +107,7 @@ public function getCartData() {
         }
     }
     else{
-        echo "please login to remove item from add to cart!";
+      $this->setRedirect("customer/account/login");
     }
 }
 
@@ -133,7 +133,7 @@ private function removeFromCart($productId) {
           echo "Product with ID $productId not found in the cart.";
       }
   } else {
-      echo "Please log in to remove items from the cart.";
+    $this->setRedirect("customer/account/login");
   }
 }
 

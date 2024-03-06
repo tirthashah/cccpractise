@@ -40,12 +40,12 @@ class Core_Model_Request
 		return false;
 	}
 
-	public function getRequestUri() //class na name mate use thay
+	public function getRequestUri()
 	{
 		$requstUri = $_SERVER['REQUEST_URI'];
 		$uri = str_replace('/cybercom/MVC/', '', $requstUri);
 		if(strpos($uri,'?') !== false) //? position return krse ? je value api hase eni ane nai male toh flase return krse
-			$uri = stristr($uri, '?', True); // ? ni agal ni puri string return kre // id remove krine path ape
+			$uri = stristr($uri, '?', True); // ? ni agal ni puri string return kre
 		// print_r($uri);
 		return $uri;
 	}
@@ -65,8 +65,8 @@ class Core_Model_Request
 	}
 	public function __construct()  
 	{
-		$requestUri = $this->getRequestUri(); //id pela nu malse  string krse 
-      $requestUri = array_filter(explode('/', $requestUri)); //veriable ma url mali  // class ne explode kriye 
+		$requestUri = $this->getRequestUri(); //id pela nu malse 
+      $requestUri = array_filter(explode('/', $requestUri)); //veriable ma url mali 
         // print_r($requestUri);
 		//-> access kre
         $this->_moduleName = isset( $requestUri[0]) ?  $requestUri[0] : "page";

@@ -2,7 +2,7 @@
 class Catalog_Block_Admin_Category_list  extends Core_Block_Template {
     public function __construct() { 
         if(Mage::getModel("core/request")->getQueryData("id")){
-              $this->setTemplate("catalog/admin/product/view.phtml"); //design
+              $this->setTemplate("catalog/admin/category/view.phtml"); //design
         }else{
             $this->setTemplate("catalog/admin/category/list.phtml"); //design
         }
