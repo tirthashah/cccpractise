@@ -42,6 +42,7 @@ class Core_Model_DB_Adapter
     
     public function fetchRow($query)
     {
+        // echo $query;
         $row=[];
         $this->connect();
         $query = $query . " LIMIT 1";
@@ -55,6 +56,7 @@ class Core_Model_DB_Adapter
     
     public function insert($query)
     {
+     
         $result = mysqli_query($this->connect(), $query);
         if($result){
             return mysqli_insert_id($this->connect);
@@ -66,6 +68,7 @@ class Core_Model_DB_Adapter
     
     public function update($query)
     {
+        // print_r($query);
         $sql = mysqli_query($this->connect(), $query);
         if ($sql) {
             return TRUE;

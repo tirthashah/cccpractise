@@ -21,10 +21,13 @@ $categoryNames = $categoryModel->getCategoryIdName();
         $selectedCategory = $categoryModel->getCategoryNameById($categoryNames, $product); ?>
         <div class="card">
             <div class="contenitore">
-                <img src="<?php echo Mage::getImagePath("catalog/product/" . $product->getImageLink()) ?>" alt="immagine">
+                <img src="<?php echo Mage::getImagePath("banner/" . $product->getImageLink()) ?>" alt="immagine">
                 <h2 class="album">
                     <?php echo $product->getName(); ?>
                 </h2>
+                <h3 class="band-name">
+                    <?php echo $selectedCategory; ?>
+                </h3>
                 <p class="details">
                     <?php echo $product->getDescription() ? $product->getDescription() : ""; ?>
                 </p>

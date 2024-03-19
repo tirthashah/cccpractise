@@ -41,7 +41,7 @@ class Core_Model_Resource_Collection_Abstract
     public function load()
     {
         $sql = "SELECT * FROM {$this->_select['FROM']}";  //table name
-        if (isset($this->_select["WHERE"])) {  //where condition set hase toh j jase
+        if (isset($this->_select["WHERE"])) {  
             $whereCondition = [];
             foreach ($this->_select["WHERE"] as $column => $value) {
                 foreach ($value as $_value) {
@@ -87,6 +87,6 @@ class Core_Model_Resource_Collection_Abstract
 
     public function getFirstItem() {
         $this->load();
-        return (isset($this->_data[0])) ? $this->_data[0] : null;
+        return isset($this->_data[0]) ? $this->_data[0] : null;
     }
 }

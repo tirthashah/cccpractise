@@ -27,3 +27,15 @@ sales/quote/add
 //sales_quote_item
 //sales_quote_customer
 //on Print_r we must get Post Data
+
+
+
+//initQuote->$this->getID()
+//CUSROMERID SESSION MATHI NE SAVE
+//model ni andar model j ava nu singleton predefine leva mate
+
+//sales_quote_customer
+//sales_ORDER_customer
+
+
+//login after quote 

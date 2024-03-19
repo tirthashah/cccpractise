@@ -23,7 +23,6 @@ class Catalog_Model_Category extends Core_Model_Abstract
     public function getCategoryNameById($mapping, $product)
     {
         $productData = $product->getData();
-       
         if (isset($productData['category_id'])) {
             return $mapping[$productData['category_id']];
         }

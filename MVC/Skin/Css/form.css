@@ -2,15 +2,15 @@
 body, h1, h2, h3, p, ul, li {
     margin: 0;
     padding: 0;
-    background-color: #ece5e5;
-    color:#d4ed177a;
+    background-color: #333;
+    color:#fff;
     
 }
 
 /** Form styles */
 .form {
     background-color: #fff; /** White background */
-    border: 1px solid rgb(231, 225, 225);
+    border: 1px solid black;
     width: 35%;
     padding: 15px;
     margin: 20px auto;

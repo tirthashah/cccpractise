@@ -23,12 +23,20 @@ class Core_Model_Session
     }
 
    
+    // public function get($key)
+    // {
+    //     if (array_key_exists($key, $_SESSION)) {
+    //         return $_SESSION[$key];
+    //     }
+    //     return false;
+    // }
+
     public function get($key)
     {
         if (array_key_exists($key, $_SESSION)) {
             return $_SESSION[$key];
         }
-        return false;
+        return 0;
     }
 
     public function set($key, $value)

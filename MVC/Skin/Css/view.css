@@ -59,12 +59,12 @@
 }
 
 .single-product input {
-  width: 50px;
-  height: 40px;
+  /* width: 50px;
+  height: 40px; */
   padding-left: 10px;
   font-size: 20px;
   margin-right: 10px;
-  border: 1px solid #ff523b;
+   /* border: 1px solid #ff523b;  */
 }
 
 input:focus {
@@ -85,4 +85,16 @@ input:focus {
 .small-img-col {
   flex-basis: 24%;
   cursor: pointer;
+}
+.btn{
+  background-color: rgb(69, 118, 73);
+  color: azure;
+  border-radius: 10px;
+  padding:5px;
+}
+.qty{
+  margin-top: 10%;
+  margin-bottom: 10%;
+  width:40px;
+  height: 25px;
 }

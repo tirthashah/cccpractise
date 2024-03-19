@@ -15,20 +15,19 @@ class Core_Model_Resource_Abstract {
     }
 
     public function getAdapter(){
-        return new Core_Model_DB_Adapter();//adapter no obj apse
+        return new Core_Model_DB_Adapter();
     }
 
     public function load($id,$column=null){
         $query = "SELECT * FROM {$this->_tableName} WHERE {$this->_primaryKey}={$id}";  
-        
         return $this->getAdapter()->fetchRow($query);
     }
 
     public function save(Core_Model_Abstract $abstract)
     {
         $data = $abstract->getData();
-        print_r($data);
-        print_r($this->getPrimaryKey());
+        // print_r($data);
+        // print_r($this->getPrimaryKey());
         if(isset($data[$this->getPrimaryKey()]) && !empty($data[$this->getPrimaryKey()])){
             unset($data[$this->getPrimaryKey()]);
             $sql = $this->editSql(
@@ -46,9 +45,11 @@ class Core_Model_Resource_Abstract {
 
     public function delete(Core_Model_Abstract $abstract )
     {
+        // echo 123;
         $id = $abstract->getId();
         $where = [$this->getPrimaryKey() => $id];
         $sql = $this->deleteSql($this->getTableName(),$where);
+        // print_r($sql);
         return $this->getAdapter()->delete($sql);
     }
 
@@ -77,6 +78,16 @@ class Core_Model_Resource_Abstract {
         return "DELETE FROM {$table_name} WHERE {$where_con_str}";
 
     }
+    // public function deleteAll($table_name, $where)
+    // {
+    //     $where_con_arr = [];
+    //     foreach ($where as $field => $value) {
+    //         $where_con_arr[] = "`$field`='$value'";
+    //     }
+    //     $where_con_str = implode(" AND ", $where_con_arr);
+    //     return "DELETE FROM {$table_name} WHERE {$where_con_str}";
+
+    // }
 
     public function insertSql($tableName, $data)
     {
